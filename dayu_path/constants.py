@@ -4,6 +4,12 @@
 # Import built-in modules
 import re
 
+EXT_PATTERN = {
+    '%': None,
+    '#': None,
+    '$': None
+}
+
 # 用于判断frame 的正则表达式
 FRAME_REGEX = re.compile(r'.*?(?<![\dvV])(\d{2,})$')
 # 用于判断系列化类型文件名的正则表达式
