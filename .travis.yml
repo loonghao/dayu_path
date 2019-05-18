@@ -15,18 +15,18 @@ matrix:
       - os: linux
         python: '2.7'
 
-
-
 env:
     global:
-        - 'LANG=zh_CN.UTF-8'
-        - 'LC_ALL=zh_CN.UTF-8'
+        - 'LANG=zh_CN.GB2312'
+        - 'LC_ALL=zh_CN.GBK'
 
-before_script: pip install coveralls
+before_script:
+    - pip install pytest
+    - pip install coveralls
 
 script:
-    - py.test
-    - coverage run --source=dayu_path setup.py test
+    - 'py.test'
+    - 'coverage run --source=dayu_path setup.py test'
 
 after_success:
     - coveralls
