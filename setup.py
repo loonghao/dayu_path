@@ -1,3 +1,4 @@
+"""Describe the distribution to distutils."""
 
 # Import third-party modules
 from setuptools import find_packages
@@ -26,4 +27,6 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
     ],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest']
 )
