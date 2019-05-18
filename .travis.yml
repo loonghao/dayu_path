@@ -12,13 +12,6 @@ matrix:
           - choco install python2
           - export PATH="/c/Python27:/c/Python27/Scripts:$PATH"
           - python -m pip install --upgrade pip wheel
-      - os: linux
-        python: '2.7'
-
-env:
-    global:
-        - 'LANG=zh_CN.GB2312'
-        - 'LC_ALL=zh_CN.GBK'
 
 before_script:
     - pip install pytest
