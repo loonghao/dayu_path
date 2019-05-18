@@ -22,18 +22,20 @@ EXT_SINGLE_MEDIA = {'.mov': {},
                     '.r3d': {},
                     }
 
-EXT_SEQUENCE_MEDIA = {'.exr' : {},
-                      '.dpx' : {},
+EXT_SEQUENCE_MEDIA = {'.exr': {},
+                      '.dpx': {},
                       '.tiff': {},
-                      '.tif' : {},
-                      '.png' : {},
-                      '.jpg' : {},
-                      '.bmp' : {},
-                      '.dng' : {},
-                      '.ari' : {},
+                      '.tif': {},
+                      '.png': {},
+                      '.jpg': {},
+                      '.bmp': {},
+                      '.dng': {},
+                      '.ari': {},
                       }
 
-SCAN_IGNORE = {'start': ('.', '..', 'Thumb'),
-               'end'  : ('.tmp')}
+SCAN_IGNORE = {
+    'start': ('.', '..', 'Thumb'),
+    'end': ('.tmp')
+}
 
 NETWORK_FILE_SYSTEM = ('nfs', 'smbfs', 'remote', 'afp', 'ftp', 'snfs')
