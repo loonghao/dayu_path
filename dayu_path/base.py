@@ -42,7 +42,6 @@ class DayuPath(BASE_STRING_TYPE):
                     lower = match.group(1).lower()
                     normalize_path = normalize_path.replace(match.group(1),
                                                             lower).rstrip('/')
-                normalize_path.encode('utf-8')
                 return super(DayuPath, cls).__new__(cls, normalize_path)
         return None
 
