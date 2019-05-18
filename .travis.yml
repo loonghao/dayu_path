@@ -1,19 +1,32 @@
 language: python
-os:
-  - linux
-  - osx
-  - windows
+
 python:
-    - "2.7"
+    - '2.7'
+
+matrix:
+    include:
+      - os: windows
+        language: sh
+        python: '2.7'
+        before_install:
+          - choco install python2
+          - export PATH="/c/Python27:/c/Python27/Scripts:$PATH"
+          - python -m pip install --upgrade pip wheel
+      - os: linux
+        python: '2.7'
+
+
 
 env:
     global:
-        - LANG=zh_CN.UTF-8
-        - LC_ALL=zh_CN.UTF-8
+        - 'LANG=zh_CN.UTF-8'
+        - 'LC_ALL=zh_CN.UTF-8'
 
 before_script: pip install coveralls
+
 script:
-    - "py.test"
-    - "coverage run --source=dayu_path setup.py test"
+    - py.test
+    - coverage run --source=dayu_path setup.py test
+
 after_success:
     - coveralls
