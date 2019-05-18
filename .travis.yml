@@ -2,8 +2,15 @@ language: python
 os:
   - linux
   - osx
+  - windows
 python:
     - "2.7"
+
+env:
+    global:
+        - LANG=zh_CN.UTF-8
+        - LC_ALL=zh_CN.UTF-8
+
 before_script: pip install coveralls
 script:
     - "py.test"

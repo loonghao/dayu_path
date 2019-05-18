@@ -1,1 +1,1 @@
-"""Test of dayu_patg."""
+"""Test of dayu_path."""

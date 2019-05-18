@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-# Import third-part modules
+# Import built-in modules
 import re
 
 # 用于判断frame 的正则表达式
