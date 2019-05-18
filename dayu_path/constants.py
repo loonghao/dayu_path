@@ -5,9 +5,9 @@
 import re
 
 EXT_PATTERN = {
-    '%': None,
+    '$': '$F{}',
+    '%': '%0{}d',
     '#': None,
-    '$': None
 }
 
 # 用于判断frame 的正则表达式

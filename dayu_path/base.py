@@ -12,6 +12,7 @@ import subprocess
 # Import local modules
 from dayu_path.constants import EXT_SINGLE_MEDIA
 from dayu_path.constants import FRAME_REGEX
+from dayu_path.constants import EXT_PATTERN
 from dayu_path.constants import PATTERN_REGEX
 from dayu_path.constants import SCAN_IGNORE
 from dayu_path.constants import UNC_REGEX
@@ -355,41 +356,28 @@ class DayuPath(BASE_STRING_TYPE):
                 return self
 
     def __convert_normal_frame_pattern(self, match, pattern):
-        default = '%0{}d'.format(len(match.group(1)))
-        mappings = {
-            '%': '%0{}d'.format(len(match.group(1))),
-            '#': '#' * len(match.group(1)),
-            '$': '$F{}'.format(len(match.group(1))),
-        }
-        replace_string = mappings.get(pattern, default)
+        replace_string = self.__get_pattern(pattern, len(match.group(1)))
         new_name = self.name[:match.start(1)] + replace_string + self.name[match.end(1):]
         return DayuPath(self.parent + '/' + new_name)
 
     def __convert_dollar_pattern(self, pattern, pattern_match):
         match = pattern_match.group
-        default = '%0{}d'.format(match(5) if match(5) else 1)
-        mappings = {
-            '$': None,
-            '%': default,
-            '#': '#' * int(match(5) if match(5) else 1)
-        }
-        pattern_ = mappings.get(pattern, default)
-        if pattern_:
-            return DayuPath(self.replace(match(4), pattern_))
-        return self
+        pattern_ = self.__get_pattern(pattern, (match(5) if match(5) else 1))
+        return DayuPath(self.replace(match(4), pattern_))
 
     def __convert_sharp_pattern(self, pattern, pattern_match):
         match = pattern_match.group
-        default = '%0{}d'.format(len(match(3)))
-        mappings = {
-            '$': '$F{}'.format(len(match(3))),
-            '%': default,
-            '#': None,
-        }
-        frame = mappings.get(pattern, default)
-        if frame:
-            return DayuPath(self.replace(match(3), frame))
-        return self
+        if pattern == '#':
+            return self
+        pattern_ = self.__get_pattern(pattern, len(match(3)))
+        return DayuPath(self.replace(match(3), pattern_))
+
+    @staticmethod
+    def __get_pattern(pattern, value):
+        match = EXT_PATTERN.get(pattern, EXT_PATTERN['%'])
+        if match:
+            return match.format(value)
+        return '#' * int(value)
 
     def __convert_percentage_pattern(self, pattern, pattern_match):
         match = pattern_match.group
