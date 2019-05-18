@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
-__author__ = 'andyguo'
-
+# Import third-part modules
 import re
 
 # 用于判断frame 的正则表达式
