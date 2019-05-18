@@ -463,11 +463,9 @@ def test_scan(mock_path):
         assert x.frames == []
         assert x.missing == []
 
-    assert not list(
-        mock_path.child('vfx_test', 'pl_0010_plt_v0002.1001.exr').scan())
-    assert not mock_path.child('vfx_test', 'pl_0010_plt_v0002.1001.exr').scan(
-        recursive=True)
-    assert not list(mock_path.child('empty_folder').scan(recursive=True))
+    assert list(mock_path.child('vfx_test', 'pl_0010_plt_v0002.1001.exr').scan()) == []
+    assert list(mock_path.child('vfx_test', 'pl_0010_plt_v0002.1001.exr').scan(recursive=True)) == []
+    assert list(mock_path.child('empty_folder').scan(recursive=True)) == []
     files = [x for x in mock_path.scan(recursive=True)]
     assert mock_path.child('ignore_test', '._DS_store') not in files
     assert mock_path.child('ignore_test', '..sdf') not in files
